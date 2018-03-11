@@ -1,0 +1,340 @@
+<div class="row">
+    <div class="col-sm-12 sdn_style">
+        <h3>{{Conversation_Name}}</h3>
+        <p>{{Conversation_Description}}</p>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <ul class="tabs"><a href="javascript:void(0)"><li class="active li_first_child"><span>1</span>Review Channel Content</li></a><a href="javascript:void(0)"><li rel="tab2"><span>2</span>Customize Channel Content</li></a><a href="javascript:void(0)"><li rel="tab3"><span>3</span>Select Design & Layout</li></a><a href="javascript:void(0)"><li rel="tab4" class="li_last_child"><span>4</span>Customize Design & Layout</li></a></ul>
+        </div>
+    </div>
+     <div id="commonAlert" class="modal fade modal in" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-xs">
+            <div class="modal-content md-bg">
+                <div class="modal-body">
+                    <div class="modal-holder">
+                        <h4 class="text-center">{{commonAlertText}}</h4>
+                        <div class="col-sm-12 text-center">
+                            <button class="btn btn-default" data-dismiss="modal" alt="Ok" title="Ok">Ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+    <div class="tab_container content demo-x ">
+		<p class="text-center"> Pick a content approach from the choices below, or create your own</p>
+        <div class="text-center choose-temp">
+            <div class="btn-group launch">
+                <button type="submit" ng-disabled=" true" class="btn top-btn-align newclass" ng-repeat="label in labels" ng-hide="showLabel">{{label}}<br><p class="getdates">{{getdates1[$index]}}</p></button>
+                <button class="btn top-btn-align" ng-repeat="label in labels" ng-show="showLabel">{{label}}<p class="getdates">{{getdates1[$index]}}</p></button>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="template-holder" id="holder" style="background:none !important; padding-top:0px !important; padding-bottom:0px !important;">
+                <div class="temp-sel-holder">
+					<div class="row">
+                        <div class="col-sm-6 copydeck" ng-repeat="x in finalArr" ui-sref="fmsg({id:id,style:x.emailoption})">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="cont-sep">
+                                         <h4 class="text-center msg_header">Approach {{$index+1}}</h4>
+                                        <h2 class="msg_h3" ng-bind-html="x.emailmainheading"></h2>
+										<h4 class="msg_h4" ng-bind-html="x.emailsubheading"></h4>
+                                        <!--<h6 class="msg_h5" ng-bind-html="x.emailsubject"></h6>
+										<p class="msg_para" ng-bind-html="x.emailbody"></p>-->
+                                        <p class="msg_para">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="hidden" ng-model="styleVal" value="{{x.style}}" />
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+			
+
+			
+			
+        </div> 
+
+    <div class="col-xs-4"><button class="back btn" ng-click="backClick()" alt="back" title="back">BACK</button></div>
+	<div class="text-center col-xs-4"><a href="javascript:void(0);" data-toggle="modal" data-target="#myModal" class="add-btn-icon"><img src="images/add-icon.png" alt=""><br>Add Your<br>Own Approach</a></div>	
+	<div class="col-sm-4">&nbsp;</div>
+	
+	
+    </div>
+
+</div>
+<div id="myModal" class="modal fade in" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog blank-content">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+			
+			 
+            
+			
+			<div id="msg-approach" class="tab-pane fade active in"> 
+			<h2 class="text-center">Create your own content approach</h2>
+				<ul class="nav nav-pills">
+					<li class="active"><a data-toggle="pill" data-target="#email" href="javascript:void(0)">Emailer</a></li>
+					<li><a data-toggle="pill" data-target="#landingpage" href="javascript:void(0)">Landing Page</a></li>
+					<li><a data-toggle="pill" data-target="#sms" href="javascript:void(0)">SMS</a></li>
+					<li><a data-toggle="pill" data-target="#push" href="javascript:void(0)">Push Notification</a></li>
+					<li><a data-toggle="pill" data-target="#voice" href="javascript:void(0)">Voice Transcript</a></li>
+					<li><a data-toggle="pill" data-target="#direct_mail" href="javascript:void(0)">Direct Mailer</a></li> 
+				</ul>
+				
+				 <div class="modal-holder" style="height:370px !important;">   
+				<div class="tab-content">
+					<div id="email" class="tab-pane fade active in">
+						<div class="temp-sel-holder" contenteditable="true">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="cont-sep">
+                                                            <h4 class="text-center">Emailer</h4>
+															
+															<div class="content-pad">
+															
+															<h1 class="text-center">Lorem Ipsum is simply dummy </h1>
+															
+															<h3 class="text-center padding_dec">It is a long established fact that a reader will be act</h3>
+															<h5 class="text-center">KNOW MORE</h5>
+															<p>&nbsp;</p>
+															<p>Dear [Customer Name]</p>
+															
+															<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal</p>
+															
+															
+															</div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+					
+					</div>
+					<div id="landingpage" class="tab-pane fade">
+						<div class="temp-sel-holder" contenteditable="true">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="cont-sep">
+                                                            <h4 class="text-center">Landing Page</h4>
+															
+															<div class="content-pad">
+															
+															<h1 class="text-center">Lorem Ipsum is simply dummy </h1>
+															
+															<h3 class="text-center">It is a long established fact that a reader will be act</h3>
+															<h5 class="text-center">KNOW MORE</h5>
+															<p>&nbsp;</p>
+															<p>Dear [Customer Name]</p>
+															
+															<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal</p>
+															
+															
+															</div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+					</div>
+					<div id="sms" class="tab-pane fade">
+						<div class="temp-sel-holder" contenteditable="true">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="cont-sep">
+                                                            <h4 class="text-center">SMS</h4>
+															
+															<div class="content-pad"> 
+															<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal</p>
+															
+															
+															</div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+					</div>
+					<div id="push" class="tab-pane fade">
+						<div class="temp-sel-holder" contenteditable="true">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="cont-sep">
+                                                            <h4 class="text-center">Push Notification</h4>
+															
+															
+															<div class="content-pad"> 
+															<p><b>PRIME BANK</b></p>
+															<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal</p>
+															
+															<p><a href="javascript:void(0);">ACTIVATE</a> | <a href="javascript:void(0);">CLOSE</a></p>
+															
+															
+															</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+					</div>
+					<div id="voice" class="tab-pane fade">
+						<div class="temp-sel-holder" contenteditable="true">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="cont-sep">
+                                                            <h4 class="text-center">Voice Transcript</h4>
+															
+															<div class="content-pad"> 
+															
+															<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal</p>
+															
+															
+															</div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+					</div>
+					<div id="direct_mail" class="tab-pane fade">
+						<div class="temp-sel-holder" contenteditable="true">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="cont-sep">
+                                                            <h4 class="text-center">Direct Mailer</h4>
+															
+															<div class="content-pad">
+															
+															<h1 class="text-center">Lorem Ipsum is simply dummy </h1>
+															
+															<h3 class="text-center">It is a long established fact that a reader will be act</h3> 
+															
+															<p>Dear [Customer Name]</p>
+															
+															<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal</p>
+															
+															
+															</div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+					
+					</div> 
+				</div>
+</div>
+
+<p class="text-center">
+    <a href="javascript:void(0)" class="btn btn-default" alt="save" title="save">Save</a>
+    <a href="javascript:void(0)" class="btn btn-default back" alt="save & Continue" title="save & Continue">Save & Continue</a>
+</p>
+			
+			
+			
+                <!-- <div class="modal-holder">
+                    <div class="col-sm-12 glb-border">
+                        <div>
+                                <div class="template-holder final-msg">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="temp-sel-holder">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="cont-sep">
+                                                            <h4 class="text-center">Email</h4>
+                                                            <p medium-editor ng-model="fillBlankTemp[0].emailtitle" ng-blur="changeAllHeading()"></p>
+                                                            <p medium-editor ng-model="fillBlankTemp[0].emailcontent"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="temp-sel-holder">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="cont-sep">
+                                                            <h4 class="text-center">SMS</h4>
+                                                            <p medium-editor ng-model="fillBlankTemp[0].smstitle"></p>
+                                                            <p medium-editor ng-model="fillBlankTemp[0].smscontent"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="temp-sel-holder">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="cont-sep">
+                                                            <h4 class="text-center">Push Notification</h4>
+                                                            <p medium-editor ng-model="fillBlankTemp[0].pushtitle"></p>
+                                                            <p medium-editor ng-model="fillBlankTemp[0].pushcontent"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="temp-sel-holder">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="cont-sep">
+                                                            <h4 class="text-center">Voice Transcript</h4>
+                                                            <p medium-editor ng-model="fillBlankTemp[0].voicetitle"></p>
+                                                            <p medium-editor ng-model="fillBlankTemp[0].voicecontent"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="temp-sel-holder">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="cont-sep">
+                                                            <h4 class="text-center">Direct Mail</h4>
+                                                            <p medium-editor ng-model="fillBlankTemp[0].directmailtitle"></p>
+                                                            <p medium-editor ng-model="fillBlankTemp[0].directmailcontent"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="temp-sel-holder">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="cont-sep">
+                                                            <h4 class="text-center">Landing Page</h4>
+                                                            <p medium-editor ng-model="fillBlankTemp[0].landingpagetitle"></p>
+                                                            <p medium-editor ng-model="fillBlankTemp[0].landingpagecontent"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <button class="btn btn-default pull-right" ng-click="addMore()" data-dismiss="modal">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" ng-model="styleVal" value="{{content.style}}" maxlength="25"/>
+                            </div>
+                    </div>
+                </div> -->
+				
+				
+				
+				
+				
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

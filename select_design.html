@@ -1,0 +1,263 @@
+<!--<div class="header">
+    <div class="container">
+        <div class="row">
+				<div class="col-sm-12">
+					<a href="#"><img src="images/logo.png" alt="Exareach" title="Exareach"></a>
+					<a href="javascript:void(0)" class="welcome_creator"><img title="Logout" alt="Logout" src="images/logout.png" ng-click="logout()"></a><a title="Change Password" href="javascript:void(0)" class="welcome_creator" ui-sref="change_pass">Change Password </a>
+					<span class="welcome_creator">Welcome {{username}}</span>
+				</div>
+			</div>
+    </div>
+</div>-->
+<!--<div class="row">
+    <div class="col-sm-12">
+        Select campaign for which you want to assign the creative exposure
+        <div class="select-holder">
+            <select ng-disabled="true">
+                <option value="{{campaign_name}}">{{campaign_name}}</option>
+            </select>
+		</div>
+	</div>
+</div>-->
+
+<style>
+    .active {
+        display: block;
+    }
+    
+    .inactive {
+        display: none;
+    }
+ 
+</style>
+<div class="row">
+    <div class="col-sm-12 sdn_top">
+        <h2>{{campaign_name}}</h2>
+        <p>{{campaign_description}}</p>
+    </div>
+</div>
+<div id="commonAlert" class="modal fade modal in" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-xs">
+        <div class="modal-content md-bg">
+            <div class="modal-body">
+                <div class="modal-holder">
+                    <h4 class="text-center">{{errorMSg}}</h4>
+                    <div class="col-sm-12 text-center">
+                        <button class="btn btn-default" data-dismiss="modal" alt="Ok" title="Ok">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 sdn_style">   
+        <h3 class="text-left" style="margin-top:0px;">{{Conversation_Name}}</h3>
+        <p class="text-left">{{Conversation_Description}}</p>
+       
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 text-center main_tab">
+        <ul class="tabs">
+            <a href="javascript:void(0)">
+                <li class="li_tab_active first_li"><span>1</span>Review Channel Content</li>
+            </a>
+            <a href="javascript:void(0)">
+                <li rel="tab2" class="li_tab_active"><span>2</span>Customize Channel Content</li>
+            </a>
+            <a href="javascript:void(0)">
+                <li rel="tab3" class="li_tab_active active"><span>3</span>Select Design & Layout</li>
+            </a>
+            <a href="javascript:void(0)">
+                <li rel="tab4" class="li_tab_active last_li"><span>4</span>Customize Design & Layout</li>
+            </a>
+        </ul>
+    </div>
+</div>
+<!-- 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" role="listbox">
+		<div class="temp-sel-holder widt660" ng-repeat="x in finalArr" ng-class="{active: activePage.x == $index, 
+    inactive: activePage.x != $index}">
+			<div class="row">
+                <div class="col-sm-12 item" ng-click="redirect(x.style_id)" ng-bind-html="to_trusted(x.mail_content)">
+                        </div>					
+            </div>
+		</div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      </a>
+    </div> -->
+<div class="row">
+    <div class="col-sm-12">
+        <p class="text-center">Select channel-specific layouts, or create your own. Pick an email layout from the choices below, or create your own</p>
+        <div class="text-center choose-temp">
+            <div class="btn-group launch">
+                <button type="submit" ng-disabled=" true" class="btn top-btn-align newclass" ng-repeat="label in labels" ng-hide="showLabel">{{label}}<br><p class="getdates">{{getdates1[$index]}}</p></button>
+                <button class="btn top-btn-align" ng-repeat="label in labels" ng-show="showLabel">{{label}}<p class="getdates">{{getdates1[$index]}}</p></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tab_container content demo-x carousel slide" id="myCarousel" data-ride="carousel" data-interval="false" ng-show="showmailer">
+    <div class="row">
+        <div class="col-sm-11">
+            <ul class="selec-land">
+                <li id="email" ng-show="enableEmail" ng-class="showmailer?'act':''"><a id="sd-email" ng-click="showmailer=true;showlanding=false;showdirect=false;" ng-disabled="mailStyle == ''">Emailer</a></li>
+                <li id="dm" class="" ng-show="enableDm" ng-class="showdirect?'act':''"><a id="sd-dm" ng-click="showmailer=false;showlanding=false;showdirect=true;" ng-disabled="dmStyle == ''">Direct Mailer</a></li>
+                <li id="landng" class="" ng-show="enableLanding" ng-class="showlanding?'act':''"><a id="sd-lp" ng-click="showmailer=false;showlanding=true;showdirect=false;" ng-disabled="landingStyle == ''">Landing Page</a></li>
+                <li id="ownlayout" class="flt-rt"><a id="sd-cl" href="javascript:void(0)">Upload your own layout</a></li>
+                <li id="upload" class="flt-rt"><a id="sd-ul" href="javascript:void(0)">Create your own layout</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-1 text-left">
+            <div class="templatecontrol">
+                <a class="prev" href="#myCarousel" role="button" data-slide="prev"></a>
+                <a class="next carousel-control" href="#myCarousel" role="button" data-slide="next"></a>
+            </div>
+        </div>
+    </div> <div class="row">
+    <div class="col-sm-12">
+        <div class="template-holder carousel-inner hlder" role="listbox" id="holder" style="background:#ebebeb; padding-bottom:20px;">
+            <div style="margin-left:10%" class="temp-sel-holder widt660 item" ng-repeat="x in mailArr" ng-class="{active: $index ==0}">
+                <div class="row">
+                    <div>
+                        <div class="col-sm-12"  ng-bind-html="to_trusted(x.mail_content)">
+                        </div>
+                        <div class="tem-hover mailer_hover" ng-model="x" ng-class="{'tem-active':selected}" ng-click="setOptionValue(x.style_id,'m',selected);selected=!selected">
+							<img src="images/selected-template.png" alt="" class="selectd">
+							<img src="images/choose-template.png" alt="" class="choose">
+                        </div>
+                    </div>
+                    <!-- <a ng-show="finalArr[$index - 1]" ng-click="activePage.x = $index-1" 
+						class="previous">Previous</a>
+						<a ng-show="finalArr[$index + 1]" ng-click="activePage.x = $index+1" 
+						class="next">Next</a>   -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+	 <div class="row">
+    <div class="col-sm-12 text-left back_button"><button class="back btn" ng-click="backClick()" alt="Back" title="Back">BACK</button></div>
+</div>
+</div>
+<div class="tab_container content demo-x carousel slide" id="myCarousel3" data-ride="carousel" data-interval="false" ng-show="showdirect">
+    <div class="row">
+        <div class="col-sm-11">
+            <ul class="selec-land">
+                <li id="email" ng-show="enableEmail" ng-class="showmailer?'act':''"><a id="sd-email" ng-click="showmailer=true;showlanding=false;showdirect=false;" ng-disabled="mailStyle == ''">Emailer</a></li>
+                <li id="dm" class="" ng-show="enableDm" ng-class="showdirect?'act':''"><a id="sd-dm" ng-click="showmailer=false;showlanding=false;showdirect=true;" ng-disabled="dmStyle == ''">Direct Mailer</a></li>
+                <li id="landng" class="" ng-show="enableLanding" ng-class="showlanding?'act':''"><a id="sd-lp" ng-click="showmailer=false;showlanding=true;showdirect=false;" ng-disabled="landingStyle == ''">Landing Page</a></li>
+                <li id="ownlayout" class="flt-rt"><a id="sd-cl" href="javascript:void(0)">Create your own layout</a></li>
+                <li id="upload" class="flt-rt"><a id="sd-ul" href="javascript:void(0)">Upload your own layout</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-1 text-left">
+            <div class="templatecontrol">
+                <a class="prev" href="#myCarousel3" role="button" data-slide="prev"></a>
+                <a class="next carousel-control" href="#myCarousel3" role="button" data-slide="next"></a>
+            </div>
+        </div>
+    </div>
+	<div class="row">
+    <div class="col-sm-12" >
+        <div class="thum-section" ng-show="showThumbnails">
+        <div class="row">
+		
+            <div class="col-sm-3 imgaes_width" ng-click="showDirectMailPreview(1)" ><div class="img_align"><img src="images/preview-template.png" alt="" class="temp-preview"><img src="images/a5-temp1.png" width="100%" style=""></div></div>
+            <div class="col-sm-3 imgaes_width" ng-click="showDirectMailPreview(2)" ><div class="img_align"><img src="images/preview-template.png" alt="" class="temp-preview"><img src="images/a4-temp1.png" width="100%"></div></div>
+			<div class="col-sm-3 imgaes_width" ng-click="showDirectMailPreview(3)" ><div class="img_align"><img src="images/preview-template.png" alt="" class="temp-preview"><img src="images/a4-temp2.png" width="100%"></div></div>
+			<div class="col-sm-3 imgaes_width" ng-click="showDirectMailPreview(4)" ><div class="img_align"><img src="images/preview-template.png" alt="" class="temp-preview"><img src="images/a5-dummyTemp.png" width="100%"></div></div>
+        </div>
+		<div class="row">
+		<div class="col-sm-3 imgaes_width" ng-click="showDirectMailPreview(1)"><div class="img_align"><img src="images/preview-template.png" alt="" class="temp-preview"><img src="images/a5-temp2.png"></div></div>
+            <div class="col-sm-3 imgaes_width" ng-click="showDirectMailPreview(2)"><div class="img_align"><img src="images/preview-template.png" alt="" class="temp-preview"><img src="images/a4-dummyTemp.png"></div></div>
+			<div class="col-sm-3 imgaes_width" ng-click="showDirectMailPreview(3)"><div class="img_align"><img src="images/preview-template.png" alt="" class="temp-preview"><img src="images/a4-temp2.png"></div></div>
+			<div class="col-sm-3 imgaes_width" ng-click="showDirectMailPreview(4)"><div class="img_align"><img src="images/preview-template.png" alt="" class="temp-preview"><img src="images/a5-dummyTemp.png"></div></div>
+		</div>
+		</div>
+		<!-- <div class="row toggle_button" ng-show="frontFlag" >
+		<div class="col-sm-12">
+		
+		  
+		</div>
+		</div> -->
+        <div class="template-holder carousel-inner thum-section" role="listbox" id="holder" ng-show="showThumbnails==false">
+		<div class="select-wrapper sel-new">
+				<select ng-model="frontBack">
+                <option name="frontBack" value="0" selected="selected">Front</option>
+                <option name="frontBack" value="1">Back</option>
+				</select>
+          </div>
+            <div style="margin-left:17%;display:block;" class="temp-sel-holder widt660 item" ng-class="{active: selectedStyleIndex ==0}">
+			   <div class="row">
+					
+                    <div class="col-sm-12"  ng-bind-html="to_trusted(dmArr[selectedStyleIndex].direct_mail_content_front)" ng-show="frontBack==0">
+					
+					
+					
+                    </div>
+                    <div class="col-sm-12"  ng-bind-html="to_trusted(dmArr[selectedStyleIndex].direct_mail_content_back)" ng-show="frontBack==1">
+                    </div>
+					<div class="tem-hover directmailer_hover" ng-class="{'tem-active':dmselected}" ng-click="setOptionValue(dmArr[selectedStyleIndex].style_id,'d',dmselected);dmselected=!dmselected">
+							<img src="images/selected-template.png" alt="" class="selectd">
+					<img src="images/choose-template.png" alt="" class="choose">
+                        </div>
+                    <!-- <a ng-show="finalArr[$index - 1]" ng-click="activePage.x = $index-1" 
+						class="previous">Previous</a>
+						<a ng-show="finalArr[$index + 1]" ng-click="activePage.x = $index+1" 
+						class="next">Next</a>   -->
+                </div>
+            </div>
+            <!-- <button ng-click="hideDirectMailPreview()" value="Back">Back to Layout Selection</button> -->
+            
+        </div>
+    </div>
+    </div>
+	
+    <div class="col-sm-11 text-left back_button"><button class="back btn" ng-click="hideDirectMailPreview()" value="Back" alt="Back" title="back">BACK</button></div>
+</div>
+<div class="tab_container content demo-x carousel slide" id="myCarousel2" data-ride="carousel" data-interval="false" ng-show="showlanding">
+    <div class="row">
+        <div class="col-sm-11">
+            <ul class="selec-land">
+                <li id="email" ng-show="enableEmail" ng-class="showmailer?'act':''"><a id="sd-email" ng-click="showmailer=true;showlanding=false;showdirect=false;" ng-disabled="mailStyle == ''">Emailer</a></li>
+                <li id="dm" class="" ng-show="enableDm" ng-class="showdirect?'act':''"><a id="sd-dm" ng-click="showmailer=false;showlanding=false;showdirect=true;" ng-disabled="dmStyle == ''">Direct Mailer</a></li>
+                <li id="landng" class="" ng-show="enableLanding" ng-class="showlanding?'act':''"><a id="sd-lp" ng-click="showmailer=false;showlanding=true;showdirect=false;" ng-disabled="landingStyle == ''">Landing Page</a></li>
+                <li id="ownlayout" class="flt-rt"><a id="sd-cl" href="javascript:void(0)">Create your own layout</a></li>
+                <li id="upload" class="flt-rt"><a id="sd-ul" href="javascript:void(0)">Upload your own layout</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-1 text-left">
+            <div class="templatecontrol">
+                <a class="prev" href="#myCarousel2" role="button" data-slide="prev"></a>
+                <a class="next carousel-control" href="#myCarousel2" role="button" data-slide="next"></a>
+            </div>
+        </div>
+    </div>
+	<div class="row">
+    <div class="col-sm-12">
+        <div class="template-holder carousel-inner" role="listbox" id="holder">
+            <div style="margin-left:10%" class="temp-sel-holder widt660 item" ng-repeat="x in landingArr" ng-class="{active: $index ==0}">
+                <div class="row">
+                    <div class="col-sm-12"  ng-bind-html="to_trusted(x.landing_page_content)">
+                    </div>
+					<div class="tem-hover landing_hover" ng-model="x" ng-class="{'tem-active':selected}" ng-click="setOptionValue(x.style_id,'l',selected);selected=!selected">
+							<img src="images/selected-template.png" alt="" class="selectd">
+					<img src="images/choose-template.png" alt="" class="choose">
+                        </div>
+                    <!-- <a ng-show="finalArr[$index - 1]" ng-click="activePage.x = $index-1" 
+						class="previous">Previous</a>
+						<a ng-show="finalArr[$index + 1]" ng-click="activePage.x = $index+1" 
+						class="next">Next</a>   -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+	
+    <div class="col-sm-12 text-right back_button"><button class="back btn" ng-click="backClick()" alt="Back" title="Back">BACK</button> <button class="back btn pull-right" ng-click="redirect()" alt="Proceed" title="Proceed">PROCEED</button></div> 
+</div>

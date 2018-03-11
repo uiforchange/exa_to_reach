@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col-md-12">
+        <h2>Manage Data Uploads</h2>
+    </div>
+</div>
+ <div id="commonAlert" class="modal fade modal in" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-xs">
+            <div class="modal-content md-bg">
+                <div class="modal-body">
+                    <div class="modal-holder">
+                        <h4 class="text-center">{{commonAlertText}}</h4>
+                        <div class="col-sm-12 text-center">
+                            <button class="btn btn-default" data-dismiss="modal" alt="Ok" title="Ok">Ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+<div class="row left-box">
+
+    <div class="col-md-3">
+        <a class="admin-boxmain" title="Sample Data File" href={{cvmUrl}}+"/files/data.zip" target="blank"> <span class="admin-box">
+				<span class="admin-boxhead">Sample Data<br class="break-mob">File
+			</span><span class="datafile-icon"></span>
+            </span>
+        </a>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<div class="rowsection adminlogin">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Frequency of Uploads</h3>
+            <div id="div_frequencyOfUpload" class="row">
+                <div class="col-md-3"  >
+                    <div ng-click="frequencyOfUpload('Daily')" id="daily_frequencyOfUpload"  class="sNotSelected sSelected">Daily</div>
+                </div>
+                <div class="col-md-3">
+                    <div ng-click="frequencyOfUpload('Weekly')"  class="sNotSelected">Weekly</div>
+                </div>
+                <div class="col-md-3">
+                    <div ng-click="frequencyOfUpload('Monthly')"  class="sNotSelected">Monthly</div>
+                </div>
+                <div class="col-md-3">
+                    <div ng-click="frequencyOfUpload('yearly')"  class="sNotSelected">Yearly</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Time to upload (eg.23:00)</h3>
+                    <form name="myForm"  autocomplete="off" novalidate ng-submit="myForm.$valid && dataSubmit()">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input ng-model="timeOfUpload" name="timeOfUpload" id="txt_timeToUpload" ng-pattern="timePattern" value=""  type="text" required />
+								<span class="timer-icon"></span>
+                                <div class="white-alert" ng-show="myForm.timeOfUpload.$dirty && myForm.timeOfUpload.$invalid">
+                                    <small ng-show="myForm.timeOfUpload.$error.required" style="color:red">Please enter Time</small>
+                                    <small ng-show="myForm.timeOfUpload.$error.pattern"  style="color:red">Please enter valid time</small>
+                                </div>
+                            </div>
+                        </div>
+                                            
+                        <div class="row btnrow">
+                            <div class="col-md-12 text-right">
+                            <input id="frequencyOfUpload" value="" type="hidden"> <input id="btn_updateUploadFrequency" ng-click="dataSubmit()"  alt="Submit" title ="Submit" value="Submit" name="submit" class="btn btn-default" type="button">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="rowsection">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>FTP</h3>
+            <div class="table-container">
+                <table class="table table-striped ng-scope">
+                    <thead>
+                        <tr>
+                            <th width="25%">FTP Port</th>
+                            <th width="25%">Username</th>
+                            <th width="25%">Password</th>
+                            <th width="25%">Directory</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                             <td >{{data.ftpSettings.host}}</td>
+                            <td >{{data.ftpSettings.username}}</td>
+                            <td >{{data.ftpSettings.password}}</td>
+                            <td >{{data.ftpSettings.hostDirectory}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="row btnrow">
+    <div class="col-md-12 text-right">
+        <input id="btn_uploadData" value="Start Data Upload" class="btn btn-default" type="button" style="margin-right:0px;">
+    </div>
+</div>-->

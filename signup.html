@@ -1,0 +1,109 @@
+<div class="header" id="loginDiv">
+  <div class="container">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <a href="#"><img src="images/logo.png" class="home-logo" alt="Xerago" title="Xerago" /></a>
+        </div>
+      </div>
+  </div>
+</div>
+ <div id="commonAlert" class="modal fade modal in" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-xs">
+            <div class="modal-content md-bg">
+                <div class="modal-body">
+                    <div class="modal-holder">
+                        <h4 class="text-center">{{commonAlertText}}</h4>
+                        <div class="col-sm-12 text-center">
+                            <button class="btn btn-default" data-dismiss="modal" alt="Ok" title="Ok">Ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+<div ng-controller="Signup_Controller" class="container ng-scope">
+<div class="row changepass anim">
+
+    <div class="col-sm-4 col-sm-offset-4"> 
+      <form name="myForm" class="form-horizontal" ng-model-options="{ updateOn: 'submit default blur',debounce : 1000}" autocomplete="off" novalidate> 
+
+		<div class="col-sm-12">
+		<h1 class="text-left cp-text">Sign Up</h1>  
+        </div>
+
+		<div class="col-sm-12"> 
+		<div class="textbox-holder profile">
+            <input class="form-control" name="firstname" ng-model="firstname" ng-pattern="patternfirstname" placeholder="First Name" type="text" maxlength="25" removespace required>
+				
+        </div> 
+		<div class="white-alert" ng-show="myForm.firstname.$dirty && myForm.firstname.$invalid">
+					<span ng-show="myForm.firstname.$error.required">First Name is required.</span>
+				    <span ng-show="myForm.firstname.$error.pattern">Enter valid characters</span>
+        </div>
+		<div class="textbox-holder profile">
+            <input class="form-control" name="lastname" ng-pattern="patternlastname" ng-model="lastname" placeholder="Last Name" type="text" autocomplete="off" maxlength="25" removespace required>
+        </div>
+		<div class="white-alert" ng-show="myForm.lastname.$dirty && myForm.lastname.$invalid">
+					<span ng-show="myForm.lastname.$error.required">Last Name is required.</span>
+				    <span ng-show="myForm.lastname.$error.pattern">Enter valid characters</span>
+        </div>
+		<div class="textbox-holder companyname">
+            <input class="form-control" name="companyname" ng-pattern="patterncompanyname" ng-model="companyname" placeholder="Company Name" type="text" autocomplete="off" maxlength="25" required>
+        </div> 
+		<div class="white-alert" ng-show="myForm.companyname.$dirty && myForm.companyname.$invalid">
+					<span ng-show="myForm.companyname.$error.required">Company Name is required.</span>
+				    <span ng-show="myForm.companyname.$error.pattern">Enter valid character</span>
+        </div>
+		<div class="textbox-holder emailaddress">
+            <input class="form-control" name="designation" ng-pattern="patternemailaddress" ng-model="emailaddress" placeholder="Email" type="text" autocomplete="off" removespace required>
+         </div>
+		 <div class="white-alert" ng-show="myForm.designation.$dirty && myForm.designation.$invalid">
+					<span ng-show="myForm.designation.$error.required">Email is required.</span>
+				    <span ng-show="myForm.designation.$error.pattern">Enter valid email</span>
+        </div>
+         
+		<div class="textbox-holder contact-number">
+            <input class="form-control numbersOnly" name="contactnumber" ng-pattern="patterncontactnumber" ng-model="contactnumber" placeholder="Contact Number" type="text" maxlength="14" required>
+         </div>
+		 <div class="white-alert" ng-show="myForm.contactnumber.$dirty && myForm.contactnumber.$invalid">
+					<span ng-show="myForm.contactnumber.$error.required">Contact Number is required.</span>
+				    <span ng-show="myForm.contactnumber.$error.pattern">Enter valid number. The pattern should be (XXX)XXX-XXXX & XXX-XXX-XXXX</span>
+        </div>
+       
+		<div class="textbox-holder profile">
+            <input class="form-control" name="username" ng-pattern="patternusername" maxlength="25" ng-model="username" placeholder="User Name" type="text" removespace required>
+         </div>
+		 <div class="white-alert" ng-show="myForm.username.$dirty && myForm.username.$invalid">
+					<span ng-show="myForm.username.$error.required">User Name is required.</span>
+				    <span ng-show="myForm.username.$error.pattern">User Name must contains atleast length 5.</span>
+        </div>
+      
+		<div class="textbox-holder pasword">
+            <input class="form-control" id='pw1' name="pw1" ng-model="pasword" ng-pattern="patternpassword" maxlength="25" placeholder="Password" type="password" removespace required>
+         </div>
+		 <div class="white-alert" ng-show="myForm.pw1.$dirty && myForm.pw1.$invalid">
+					<span ng-show="myForm.pw1.$error.required">Password is required.</span>
+				    <span ng-show="myForm.pw1.$error.pattern">Please enter atleast 5 characters</span>
+        </div>
+		
+		
+		<div class="textbox-holder conf-pasword">
+            <input class="form-control" id='pw2' maxlength="25" name="pw2" ng-pattern="patternpassword" ng-model="confirmpassword" placeholder="Confirm Password" type="password" pw-check="pw1" removespace required>
+         </div>
+		 <div class="white-alert" ng-show="myForm.pw2.$dirty && myForm.pw2.$invalid">
+		 	        <span ng-show="myForm.pw2.$error.required">Password is required.</span>
+		 	        <span ng-show="myForm.pw2.$error.pwmatch">Please fill the correct password</span>
+        </div>
+          
+		<div class="text-center login-holder ">
+            <button ng-disabled="myForm.$invalid" type="submit" ng-click="update()" class="btn btn-default mtop10" title="Submit">Submit</button> 
+          </div>
+		  <!--<div><a href="javascript:void(0)" ui-sref="plan-upgrade" alt="Plan Upgrade" title="Plan Upgrade"> Plan Upgrade</a></div>-->
+		 
+		  
+		</div>
+	  </form>
+</div>
+</div>
+</div>
+

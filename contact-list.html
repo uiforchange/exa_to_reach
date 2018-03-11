@@ -1,0 +1,61 @@
+	<div class="container">
+	 
+		<div class="row mrgbth3">
+			 <div class="col-sm-12">
+				
+				<div class="row">
+				
+					<div class="col-sm-6">
+						<h3>Select Contact List</h3>
+					
+						<!--<label class="chkbox-holder cbox bg-trans-check" for="limit">
+						<input class="cbox" id="limit" type="checkbox" ng-model="selectedAll" ng-click="checkAll()" /><label for="limit"></label>Select All</label>
+						<label class="bg-trans-check"><b>{{ selectedItems }}</b>&nbsp;&nbsp;Lists Selected</label>-->
+					
+					</div>
+					
+					<div class="col-sm-6">
+						<div class="searchcontainer clsearch"> 
+						
+							<input value="Search List" ng-model="searchStr.name" onfocus="if($(this).val()=='Search List'){$(this).val('')}" onblur="if($(this).val()==''){$(this).val('Search List')}" name="search" type="text" maxlength="25">
+							<a class="srch sprite-globe" href="javascript:void(0);" title="Search"></a>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<!--<div class="col-sm-4" ng-repeat="item in (filteredItems =  (items | filter : searchStr))">
+					<label ng-class="{'chck-active': item.selected}" class="chkbox-holder cbox mbot10" for="List-{{$index}}">
+						<input ng-model="item.selected" class="contactSelected" name="{{item.refCode}}" type="checkbox" id="List-{{$index}}" ng-change="checkStatus()">
+						<label for="List-{{$index}}"></label>{{item.name}}</label>
+					</div>-->
+					<div class="col-sm-4 " ng-repeat="item in (filteredItems =  (items | filter : searchStr))" ng-hide="item.contactcount == 0"><div class="radio-holder" ng-class="{ 'seg-act': $index == selectedIndex }"  ng-click="checkStatus(item.refCode,$index)" ng-bind="item.name +' ('+ item.contactcount+' Contact)'"></div></div>
+					
+					<h3 class="col-sm-12" ng-show="!filteredItems.length">Contact Not found!</h3>
+				</div>
+				<p>&nbsp;</p>
+				<div class=" text-right">
+					<button class="btn btn-default back" title="Close" ui-sref="dashboard">Close</button><button class="btn btn-default mr-0" title="Proceed" ng-click="contactListGen()">Proceed</button>		 
+				</div>
+			 <br><br><br>
+			 </div>
+		</div>
+		 <div id="commonAlert" class="modal fade modal in" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-xs">
+            <div class="modal-content md-bg">
+                <div class="modal-body">
+                    <div class="modal-holder">
+                        <h4 class="text-center">{{commonAlertText}}</h4>
+                        <div class="col-sm-12 text-center">
+                            <button class="btn btn-default" data-dismiss="modal" alt="Ok" title="Ok">Ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+		   
+
+	</div>
+
+	

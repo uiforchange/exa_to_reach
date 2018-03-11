@@ -1,0 +1,331 @@
+		<div class="row changepass">
+			<div class="col-sm-12">
+				 <h2>My Profile</h2>
+				 
+				  <form name="myForm" class="form-horizontal" ng-model-options="{ updateOn: 'default blur',debounce : 1000}" autocomplete="off" novalidate ng-submit="myForm.$valid && update()">
+				  
+				   <div class="form-group">
+    <h3 class="control-label col-sm-6 mbot10">Personal Information <a href="javascript:void(0);" class="sprite-globe edit-template" title="Edit"></a></h3> 
+  </div>
+  
+   
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="FN">First Name</label>
+    <div class="col-sm-4">
+
+      <input type="text" class="form-control" id="FN" placeholder="" name="firstname" ng-model="firstname" ng-pattern="patternfirstname" type="text" maxlength="25" removespace required>
+		<div class="white-alert" ng-show="myForm.$submitted || myForm.firstname.$dirty && myForm.firstname.$invalid">
+		<span ng-show="myForm.firstname.$error.required">First Name is required.</span>
+		<span ng-show="myForm.firstname.$error.pattern">Enter valid characters</span>
+		</div>
+		<div class="white-alert" ng-show="myForm.lastname.$dirty">
+		<span ng-show="myForm.firstname.$error.required">First Name is required.</span>
+		</div>
+
+    </div>
+	
+  </div>
+  
+   <div id="commonAlert" class="modal fade modal in" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-xs">
+            <div class="modal-content md-bg">
+                <div class="modal-body">
+                    <div class="modal-holder">
+                        <h4 class="text-center">{{commonAlertText}}</h4>
+                        <div class="col-sm-12 text-center">
+                            <button class="btn btn-default" data-dismiss="modal" alt="Ok" title="Ok">Ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="LN">Last Name</label>
+    <div class="col-sm-4">
+
+      <input type="text" class="form-control" id="LN" placeholder="" name="lastname" ng-pattern="patternlastname" ng-model="lastname" type="text" maxlength="25" removespace required>
+		<div class="white-alert" ng-show="myForm.$submitted || myForm.lastname.$dirty && myForm.lastname.$invalid || myForm.gender1.$dirty">
+		<span ng-show="myForm.lastname.$error.required">Last Name is required.</span>
+		<span ng-show="myForm.lastname.$error.pattern">Enter valid characters</span>
+		</div>
+		
+    </div>
+	
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2">Gender</label>
+	
+    <div class="col-sm-4">
+ 
+      <label class="radio-inline custom-radio"><input type="radio" name="gender1" ng-model="gender" value="male" ng-required="!gender1" id="gender1" ng-model-options="{debounce : 0}"><label for="gender1"></label>Male</label> <label class="radio-inline custom-radio"><input type="radio" name="gender2" ng-model-options="{debounce : 0}" ng-model="gender" value="female" ng-required="!gender2" id="gender2"><label for="gender2"></label>Female</label> 
+	  <div class="white-alert" ng-show="myForm.$submitted || myForm.gender1.$pristine && myForm.gender1.$invalid || myForm.companyname.$dirty">
+				<span ng-show="myForm.gender1.$error.required || myForm.gender2.$error.required">Select the gender</span>
+	  </div>  
+    </div>
+	
+	</div>
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="CN">Company Name</label>
+    <div class="col-sm-4">
+
+      <input type="text" class="form-control" id="CN" placeholder="" name="companyname" ng-pattern="patterncompanyname" ng-model="companyname" autocomplete="off" maxlength="25" required>
+	<div class="white-alert" ng-show="myForm.$submitted || myForm.companyname.$dirty && myForm.companyname.$invalid || myForm.weburl.$dirty">
+				<span ng-show="myForm.companyname.$error.required">Company Name is required.</span>
+				<span ng-show="myForm.companyname.$error.pattern">Enter valid character</span>
+	</div>
+    </div>
+
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="WU">Web URL</label>
+    <div class="col-sm-4">
+
+      <input type="text" class="form-control" ng-model="weburl" ng-pattern="patternurl" name="weburl" id="WU" required>
+
+      <div class="white-alert" ng-show="myForm.$submitted || myForm.weburl.$dirty && myForm.weburl.$invalid || myForm.emailaddress.$dirty">
+				<span ng-show="myForm.weburl.$error.required">URL is required.</span>
+				<span ng-show="myForm.weburl.$error.pattern">Enter valid URL</span>
+				
+	</div>
+    </div>
+	
+  </div>
+  <p>&nbsp;</p>
+  
+  
+   <div class="form-group">
+    <h3 class="control-label col-sm-6 mbot10">Contact Information <a href="javascript:void(0);" class="sprite-globe edit-template" title="Edit"></a></h3> 
+  </div>  
+  
+  
+  <div class="form-group ">
+    <label class="control-label col-sm-2" for="EA">Email Address</label>
+    <div class="col-sm-4">
+
+      <input type="text" class="form-control" id="EA" name="emailaddress" placeholder="" ng-pattern="patternemailaddress" ng-model="emailaddress" autocomplete="off" removespace required>
+	<div class="white-alert" ng-show="myForm.$submitted || myForm.emailaddress.$dirty && myForm.emailaddress.$invalid || myForm.phonenumber.$dirty && myForm.phonenumber1.$dirty">
+					<span ng-show="myForm.emailaddress.$error.required">Email is required.</span>
+				    <span ng-show="myForm.emailaddress.$error.pattern">Enter valid email</span>
+    </div>
+    </div>
+
+  </div>
+
+  
+   <div class="form-group">
+    <label class="control-label col-sm-2" for="PN">Phone Number</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control codew numbersOnly" name="phonenumber" ng-model="phonenumber" id="PN" ng-pattern="patternmobilenumber1" placeholder="" maxlength="3" required>
+	  <input type="text" class="form-control pnw numbersOnly" ng-model="phonenumber1" name="phonenumber1" id="PN1a" ng-pattern="patternmobilenumber2" placeholder="" maxlength="10" required>
+		<div class="white-alert" ng-show="myForm.$submitted || myForm.phonenumber.$dirty && myForm.phonenumber.$invalid || myForm.phonenumber1.$dirty && myForm.phonenumber1.$invalid || myForm.mobilenumber.$dirty">
+		<span ng-show="myForm.phonenumber.$error.required || myForm.phonenumber1.$error.required">Phone Number is required.</span>
+		<span ng-show="myForm.phonenumber.$error.pattern || myForm.phonenumber1.$error.pattern">Enter valid Phone number.</span>
+		</div>
+	 </div>
+
+  </div>
+
+  
+   <div class="form-group">
+    <label class="control-label col-sm-2" for="MN">Mobile Number</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control numbersOnly" id="MN" name="mobilenumber" ng-pattern="patternmobilenumber" ng-model="mobilenumber" placeholder="" type="text" maxlength="14" required>
+		<div class="white-alert" ng-show="myForm.$submitted || myForm.mobilenumber.$dirty && myForm.mobilenumber.$invalid || myForm.zipcode.$dirty">
+		<span ng-show="myForm.mobilenumber.$error.required">Mobile Number is required.</span>
+		<span ng-show="myForm.mobilenumber.$error.pattern">Enter valid mobile number. The pattern should be (XXX)XXX-XXXX & XXX-XXX-XXXX</span>
+		</div>
+
+    </div>
+  </div>
+  
+
+         
+  
+  
+  <div class="form-group">
+ <label class="control-label col-sm-2" for="country">Country</label>
+    <div class="col-sm-4">
+	<div class="select-holder wid100">
+		<select ng-model="profilecountry" name="profilecountry" ng-options="country.name for country in countries1 track by country.code" required ng-change="changeItem(zipcode)">
+			<option value="">Select the country</option>
+
+       </select>
+<div class="white-alert" ng-show="myForm.profilecountry.$dirty && myForm.profilecountry.$invalid">
+		<span ng-show="myForm.profilecountry.$error.required">Select the Country</span>
+		</div>
+
+		</div>
+		
+    </div>
+  </div>
+  
+  
+  <!-- <div class="form-group ">
+    <label class="control-label col-sm-2" for="state">State</label>
+    <div class="col-sm-4">
+		<div class="select-holder wid100">
+		<select class="states" name="profilestate" ng-model="profilestate" id="stateId" required><option value="">Select State</option></select>
+		<div class="white-alert" ng-show="myForm.profilestate.$dirty && myForm.profilestate.$invalid">
+		<span ng-show="myForm.profilestate.$error.required">Select the State</span>
+		</div>
+		</div>
+
+    </div>
+  </div>
+  
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="city">City</label>
+    <div class="col-sm-4">
+     <div class="select-holder wid100">
+			<select class="cities" id="cityId" name="profilecity" ng-model="profilecity">
+			<option value="" required>Select City</option></select>
+				<div class="white-alert" ng-show="myForm.profilecity.$dirty && myForm.profilecity.$invalid">
+				<span ng-show="myForm.profilecity.$error.required">Select any one of the City</span>
+				</div>
+				<div class="white-alert" ng-show="myForm.profilecity.$dirty && myForm.profilecity.$invalid">
+				<span ng-show="myForm.profilecity.$error.required">Select the City</span>
+				</div>
+		
+			</div>
+    </div>
+  </div> -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="ZC">Zip Code</label>
+    <div class="col-sm-4">
+
+      <input type="text" class="form-control" id="ZC" name="zipcode" ng-pattern="patternzipcode" ng-model="zipcode" ng-change="changeItem(zipcode)" placeholder="" type="text" maxlength="14" required placeholder="">
+	<div class="white-alert" ng-show="myForm.$submitted || myForm.zipcode.$dirty && myForm.zipcode.$invalid || myForm.stateName.$dirty && myForm.zipcode.$pristine || myForm.cityName.$dirty && myForm.zipcode.$pristine">
+		<span ng-show="myForm.zipcode.$error.profilecountry1">Please enter the zipcode for the selected country</span>
+		<span ng-show="myForm.zipcode.$error.required">ZipCode is required.</span>
+		<span ng-show="myForm.zipcode.$error.pattern">Zipcodes should be formatted as 5 digits(12345) or the 5+4 (12345-1234)format</span>
+		</div>
+	<!-- <div class="white-alert" ng-show="myForm.zipcode.$dirty">
+	<span ng-show="invalidzip">invalidzip</span>
+				<span ng-show="profilecountry1">Invalid Zip</span>
+				
+	</div> -->
+	 </div>
+  </div>
+  
+<!--    <div class="form-group">
+    <label class="control-label col-sm-2" for="ZC">Country</label>
+    <div class="col-sm-4">
+       <input type="text" class="form-control" id="ZC3" name="countryName" ng-disabled="zipcode" ng-model="countryName" required placeholder="United State">
+	<div class="white-alert" ng-show="myForm.$submitted || myForm.countryName.$dirty && myForm.countryName.$invalid">
+				<span ng-show="myForm.zipcode.$error.required">Country is required.</span>
+				
+	</div>
+	   
+		
+	</div>
+	
+
+  </div> -->
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="ZC">State</label>
+    <div class="col-sm-4">
+         <input type="text" class="form-control" name="stateName" id="ZC2" ng-disabled="zipcode" ng-model="stateName" required>
+	<div class="white-alert" ng-show="myForm.$submitted || myForm.stateName.$dirty && myForm.stateName.$invalid">
+				<span ng-show="myForm.stateName.$error.required">State is required.</span>
+				
+	</div>
+
+	</div>
+
+  </div>
+    <div class="form-group">
+    <label class="control-label col-sm-2" for="ZC">City</label>
+    <div class="col-sm-4">
+		<input type="text" class="form-control" id="ZC1" name="cityName" ng-disabled="zipcode" ng-model="cityName" required>
+	<div class="white-alert" ng-show="myForm.$submitted || myForm.cityName.$dirty && myForm.cityName.$invalid">
+				<span ng-show="myForm.cityName.$error.required">City is required.</span>
+				
+	</div>
+
+	</div>
+
+  </div>
+  
+  
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="add1">Address 1</label>
+    <div class="col-sm-4">
+
+      <input type="text" class="form-control" id="add1" placeholder=""  name="address1" ng-model="address1" autocomplete="off" maxlength="40" required>
+		<div class="white-alert" ng-show="myForm.$submitted || myForm.address1.$dirty && myForm.address1.$invalid || myForm.address2.$dirty">
+		<span ng-show="myForm.address1.$error.required">Address is required.</span>
+
+		</div>
+
+
+    </div>
+
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="add2">Address 2</label>
+    <div class="col-sm-4">
+
+      <input type="text" class="form-control" id="add2" placeholder="" name="address2" ng-model="address2" autocomplete="off" maxlength="40" required>
+
+   	<div class="white-alert" ng-show="myForm.$submitted || myForm.address2.$dirty && myForm.address2.$invalid || myForm.address3.$dirty">
+			<span ng-show="myForm.address2.$error.required">Address is required.</span>
+			
+	</div> 
+
+    </div>
+
+  </div>
+  <div class="form-group mbot10">
+    <label class="control-label col-sm-2" for="add3">Address 3</label>
+
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="add3" placeholder="" ng-model="address3" name="address3" ng-pattern="patterncompanyname" autocomplete="off" maxlength="40" required>
+
+    
+	<div class="white-alert" ng-show="myForm.$submitted || myForm.address3.$dirty && myForm.address3.$invalid">
+			<span ng-show="myForm.address3.$error.required">Address is required.</span>
+			
+	</div>
+  </div>
+  
+   
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-4 text-right">
+      <button type="submit"  class="btn btn-default mr-0 mtop10" title="Update">Update</button>
+    </div>
+  </div>
+</form>
+ 
+
+			</div>
+		</div>
+		
+		 
+		
+		 
+		
+		
+		
+		 
+
+	</div>
+
+

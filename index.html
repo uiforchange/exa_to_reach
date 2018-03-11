@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Xerago Customer Value Maximization</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="images/fav-icon.ico" type="image/ico" />
+
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/jquery.mCustomScrollbar.css" rel="stylesheet">
+        <link href="css/datepicker.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/medium-editor.min.css">   
+        <link rel="stylesheet" type="text/css" href="js/plugins/font-awesome-4.5.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/keditor-1.1.3.css" />
+        <link rel="stylesheet" type="text/css" href="css/keditor-components-1.1.3.css" />  
+        <link href="css/color-picker.css" rel="stylesheet" /> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.0/croppie.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.0/croppie.min.css">
+        
+        <script src="js/jquery.min.js"></script>
+		
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery-ui.js"></script>
+		<script src="js/jquery.expander.js"></script>
+        <script src="js/common.js"></script>        
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-animate.min.js"></script>
+        <script src="js/angular-sanitize.min.js"></script>
+        <script src="js/angular-ui-router.js"></script>
+        <script src="js/medium-editor.min.js"></script>
+        <script src="js/angular-medium-editor.min.js"></script>
+          <script src="js/moment.min.js"></script>
+        <script src="js/angular-moment.min.js"></script>
+      
+        <script src="js/sortable.js"></script>
+		<script src="js/color-picker.js"></script>
+		<link rel="stylesheet" href="css/jquery-ui.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.0/croppie.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.4.0/croppie.min.js"></script>
+       
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    <style>
+        
+        .dboard .navbar-nav>li>.dropdown-menu {
+          margin-top: 20px;
+          border-top-left-radius: 4px;
+          border-top-right-radius: 4px;
+        }
+
+        .dboard .navbar-default .navbar-nav>li>a {
+          width: 200px;
+          font-weight: bold;
+        }
+
+        .dboard .mega-dropdown {
+          position: static !important;
+          width: 100%;
+        }
+
+        .dboard .mega-dropdown-menu {
+          padding: 20px 0px;
+          width: 1000px;
+          box-shadow: none;
+          -webkit-box-shadow: none;
+          left:-80%;
+        }
+                </style>
+
+
+ 
+    </head>
+    <body class='body-bg'>
+        <div ng-app="communicator">
+            <div id="loginDiv" ng-controller="indexController">
+                <div class="header">
+                    <div class="container">
+						<div class="row">
+						<div class="col-md-12">
+                        <nav class="navbar navbar-inverse">
+                            <div class="navbar-header"> <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>                        
+                                </button>
+                                <a href="javascript:void(0)" class="logo"><img src="images/logo.png"  alt="Xerago" title="Xerago" ng-click="goHome()"></a>
+                            </div>
+                            <div class="collapse navbar-collapse" id="myNavbar">
+                                <ul class="nav navbar-nav main-nav">
+                                    <li class="active home"><a href="javascript:void(0)" ng-click="goHome()"><span class="iconhome sprite-globe"></span>Home</a></li>
+									
+                                    <li class="dropdown reports"> <a class="dropdown-toggle" href="javascript:void(0);"><span class="iconreport sprite-globe"></span>Reports<span class="menu-icon"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Conversation Dashboard</a></li>
+                                            <li><a href="#">Conversation Perfomance Report</a></li>
+                                        </ul>
+                                    </li>
+									
+									
+									
+                                    <li class="supports"><a href="#"><span class="iconsuport sprite-globe"></span>Support</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+								<li> <div>
+  <a class="notify" ng-click="headernotifi()" alt="Notification" title="Notification" data-toggle="dropdown"><span class="not-value1" ng-class="{'not-value': count > 0}" id="headernotifi">{{count}}</span></a>
+<!--   <a class="notify" ng-show="clicker" ng-click="asfas()" data-toggle="dropdown"><span class="not-value" ng-cloak>{{count}}</span></a> -->
+<div class="dropdown-menu">
+  <ul class="scrollbefore" ng-show="idris">
+    <li class="notify-header col-sm-12 text-center bgf9">Notifications</li>
+    <li class="notify-values" ng-repeat="notification in getnotifications.notifications">
+    
+	<p class="col-sm-9 {{notification.getreviewer}}">
+    <span class="nvalue-head">{{notification.name}}</span><br>
+	<span><b>{{notification.user_role}}:</b> {{notification.raisedBy}}</span>
+	<span>{{notification.message}}</span>
+	</p>
+	<p class="col-sm-3 online-status text-right"> <time am-time-ago="notification.updateTime" title="{{ notification.updateTime | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time></p>
+	
+	</li>  
+     <!-- <li class="notify-values" ng-if="!Array.isArray(getnotifications.notifications)">
+    <p class="col-sm-9 {{getnotifications.notifications.getreviewer}}">
+
+    <span class="nvalue-head">{{getnotifications.notifications.name}}</span>
+    <span><b>{{getnotifications.notifications.user_role}}:</b> {{getnotifications.notifications.raisedBy}}</span>
+    <span>{{getnotifications.notifications.message}}</span>
+    </p>
+    <p class="col-sm-3 online-status text-right"> <time am-time-ago="getnotifications.notifications.updateTime" title="{{ getnotifications.notifications.updateTime | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time></p>
+    
+    </li> -->  
+
+	
+	<!-- <li class="notify-values">
+	<p class="col-sm-9 approve">
+	<span class="nvalue-head">Credit Card Activation Conversation</span>
+	<span><b>Jackson:</b> Reviewer</span>
+	<span>Conversation Approved</span>
+	</p>
+	<p class="col-sm-3 online-status text-right"><span></span> 2h 40m</p>
+	
+	</li>  
+	
+	<li class="notify-values">
+	<p class="col-sm-9 reject">
+	<span class="nvalue-head">Credit Card Activation Conversation</span>
+	<span><b>Jackson:</b> Reviewer</span>
+	<span>Conversation Rejected</span>
+	</p>
+	<p class="col-sm-3 online-status text-right">Yesterday</p>	
+	</li>	 -->
+	
+    <!-- <li class="view-all text-center bgf9"><a href="#" title="View All">View All</a></li> -->
+
+	
+  </ul>
+
+   <ul class="bgf9hidescroll" ng-show="idris1">
+    <li class="notify-header col-sm-12 text-center bgf922">No New Notifications</li>
+</ul>
+  <!-- <ul class="dropdown-menu" ng-class="{'no-notify':!getnotifications.notifications}" ng-if="!getnotifications.notifications">
+   <li class="notify-header col-sm-12 text-center bgf9">No new Notification</li>
+  </ul> -->
+  
+</div></div> </li>
+								<li class="rt-mnu">
+                                    <a class="dropdown-toggle" id="loginuser" href="javascript:void(0)">Welcome, {{loggedInUserName}}<!-- <span class="menu-icon"></span> -->
+                                </a>
+									<ul class="dropdown-menu welcome-icon">
+											<li><a href="javascript:void(0)" alt="My Profile" title="My Profile"> My Profile </a></li>
+                                            <li><a href="javascript:void(0)" ui-sref="change_pass" alt="Change Password" title="Change Password"> Change Password</a></li>
+                                    </ul>
+								</li>
+                                    <li><a href="javascript:void(0)" ng-click="logout()"><span class="logout sprite-globe" style="padding-left:0px !important;" title="Logout" alt="Logout"></span></a></li>
+                                    
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+					</div>
+					</div>
+                </div>
+                <div class="container" ui-view style="min-height:600px;"> </div>
+            </div>
+        <div class="footer text-center">
+            <p>
+                2017 &copy; Copyright by Xerago | <a href="javascript:void(0)" title="Privacy Policy">Privacy Policy</a>
+            </p>
+		</div>
+        <div class="login-footer text-center">
+            <p>
+                2017 &copy; Copyright by Xerago | <a href="javascript:void(0)" title="Privacy Policy">Privacy Policy</a>
+            </p>
+		</div>
+        </div>
+
+        <script src="app/app.js"></script>
+        <script src="app/login.js"></script>
+        <script src="app/change_pass.js"></script>
+        <script src="app/forgot_pass.js"></script>
+        <script src="app/forgot_pass_auth.js"></script>
+        <script src="app/dashboard.js"></script>
+        <script src="app/messaging.js"></script>
+        <script src="app/design_and_selection.js"></script>
+        <script src="app/finalize_design.js"></script>
+        <script src="app/finalize_design_edit.js"></script>
+        <script src="app/finalize_messaging.js"></script>
+        <script src="app/finalize.js"></script>
+        <script src="app/sign_up.js"></script>
+		<script src="app/planupgrade.js"></script>
+		<script src="app/profile-update.js"></script>
+        <script src="app/select_design.js"></script>
+		<script src="app/editor_test.js"></script>
+		<script src="app/location.js"></script>
+
+        <script src="js/plugins/ckeditor-4.5.6/ckeditor.js"></script>
+        <script src="js/plugins/ckeditor-4.5.6/adapters/jquery.js"></script>
+        <script src="js/keditor-1.1.3.js"></script>
+        <script src="app/ngStorage.js"></script>
+		<script src="app/contactlist.js"></script>
+        <script src="app/adminSetting.js"></script>
+         <script src="app/sms_controller.js"></script>
+        <script src="app/emailPlugin.js"></script>
+        <script src="app/makePaymentSummaryController.js"></script>
+        <script src="app/createCampaignController.js"></script>
+        <script src="app/planselection.js"></script>
+        <script src="app/campaignSchedulingSettings.js"></script>
+        <script src="app/mailerSettings.js"></script>
+        <script src="app/configureSettings.js"></script>
+        <script src="app/manageResponseHistory.js"></script>
+        <script src="app/manageUsers.js"></script>
+        <script src="app/manageDataBase.js"></script>
+        <script src="app/creative_edit.js"></script>
+        <script src="app/createuser.js"></script>
+        <script src="app/createsegments.js"></script>
+        <script src="app/dirPagination.js"></script>
+		<script src="app/setFilters.js"></script>
+        <script src="js/progressbar.js"></script>
+          <script src="js/bootstrap.ui.tpls.js"></script>
+		 <script src="js/ngpatternrestrict.js"></script> 
+        <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+		  
+		  <script>
+		  
+		  $( document ).ready(function() {
+    $(".reports .dropdown-toggle").removeAttr("aria-haspopup");
+    $(".reports .dropdown-toggle").removeAttr('aria-expanded');
+}); 
+ 
+		  </script>	   
+    </body>
+</html>

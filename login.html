@@ -1,0 +1,53 @@
+<div class="container" id="loginDiv">
+	<h1 class="text-center">Xerago Customer Value Maximization</h1> 
+
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-1">
+			<div class="intro-para">Everything you need to maximize customer <br>value, in one platform.</div>
+			<img src="images/login.png" alt="" />
+		</div>
+
+		<div class="col-sm-4">
+			<form name="form" novalidate autocomplete="off">
+			<div class="text-center login-holder">
+				<img src="images/logo-login.png" class="logo-small" alt="" />
+			</div>
+			
+			<div class="user-name">
+				<input type="text" name="username" id="form_username" ng-model="user_name" size="20" maxlength="25" autocomplete="off"/>
+				<span  ng-show="form.username.$invalid">	    
+				<!--<input type="text" value="">-->
+			</div>
+			<span class="alert" ng-show="form.username.$error.required">Username is required.</span>
+			<div class="password">
+				<!--<input type="password" value="">-->
+				<input type="password" name="password" id="form_password" ng-model="pass" size="20" maxlength="25" autocomplete="off" />
+				<span  ng-show="form.password.$invalid">
+			</div>
+			<span class="alert" ng-show="form.password.$error.required">Password is required.</span>
+			<div class="text-left login-holder">
+				<a href="#" ui-sref="forgot_pass" alt="Forgot Password" title="Forgot Password">Forgot Password?</a>
+			</div> 
+			<p class="text-center login-holder">
+				<button type="submit" class="btn btn-default" name="login" id="form_login" ng-click="check()" title="Login" ng-disabled="form.$invalid || dataLoading">LOGIN</button>
+			</p>
+			<div class="alert marginBtm0" ng-model="err">{{err}}</div>
+			<!-- <div class="text-left login-holder">
+				<a href="#" ui-sref="sign_up" alt="Signup" title="Signup">Signup</a>
+			</div> --> 
+			<!--<div class="text-left login-holder">
+				<a href="#" ui-sref="contact_list" alt="Contact List" title="Contact List">Contact List</a>
+			</div> -->
+			<!--<div style="color:#000000"><a href="javascript:void(0)" ui-sref="contact_list" alt="Contact List" title="Contact List"> Contact List</a></div>-->
+			
+			<!--<p class="text-center login-holder">
+				<button type="button" class="btn btn-default" name="forgotPass" id="forgotPass" ui-sref="forgot_pass" title="Change Pass" ">Forgot Password?</button>
+			</p>-->
+			</form>
+		</div>
+
+	</div>
+
+</div>
+
+

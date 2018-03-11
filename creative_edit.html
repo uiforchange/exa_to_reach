@@ -1,0 +1,247 @@
+<style> 
+    div#holder3,div#holder2,div#holder1{
+        background: white;
+    }
+</style>
+<div id="mask" ng-click="modalClose('#changephoto,#mask')"></div>
+<div id="changephoto" class="modal" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content md-bg">
+            <div style="clear:both; overflow:hidden;">
+                <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                <div class="mod-head"> <button type="button" class="close md-close" data-dismiss="modal" ng-click="modalClose('#changephoto,#mask')">×</button>                    </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-holder">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-2 col-sm-2 col-md-2 folderssection" ng-repeat='folder in folders' ng-click="folerselection(folder)" ng-show="folers">
+                                <img src="images/foldericon.png" alt="Folder icon" width="250" height="250">
+                                <p>{{folder}}</p>
+                            </div>
+                            <div ng-hide='gallerylistsection'>
+                                <div class="col-xs-3 col-md-2" ng-repeat='galleryimglist in galleryimglists'>
+                                    <a href="javascript:void(0);" class="thumbnail">
+                                        <img ng-model="imgsec" ng-click="selectedimg(selectedfolderimgs,galleryimglist)" ng-src="{{selectedfolderimgs}}/{{galleryimglist}}"
+                                            alt="Thumbnail Images">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button ng-hide='gallerylistsection' type="button" class="btn btn-default back" title="Back" ng-click="returntofolder()">Back</button>
+                <button type="button" class="btn btn-default" title="Upload you image" id="uploadfiles">Upload your image</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="commonAlert" class="modal fade modal in" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-xs">
+        <div class="modal-content md-bg">
+            <div class="modal-body">
+                <div class="modal-holder">
+                    <h4 class="text-center">{{commonAlertText}}</h4>
+                    <div class="col-sm-12 text-center">
+                        <button class="btn btn-default" data-dismiss="modal" alt="Ok" title="Ok">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="finaldesign" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content md-bg">
+            <div style="clear:both; overflow:hidden;">
+                <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                <div class="mod-head"> <button type="button" class="close md-close" data-dismiss="modal">×</button> </div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-holder">
+                    <div class="tab-content">
+                        <div id="conentEdit{{$index}}" class="tab-pane fade active in">
+                            <ul class="nav nav-pills">
+                                <li class="active desktop">
+                                    <a data-toggle="pill" data-target="#desktop"></a>
+                                </li>
+                                <li class="ipad">
+                                    <a data-toggle="pill" data-target="#ipadpotrait"></a>
+                                </li>
+                                <!-- 													<li><a data-toggle="pill" data-target="#smalltablet">Tablet</a></li>
+ -->
+                                <li class="mobile">
+                                    <a data-toggle="pill" data-target="#Iphone"></a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="desktop" class="tab-pane fade in active">
+                                    <iframe width="100%" height="850" ng-bind-html="LoadingUrl">
+                                    </iframe>
+                                </div>
+                                <div id="ipadpotrait" class="tab-pane fade in">
+                                    <iframe width="768" height="1024" ng-bind-html="LoadingUrl">
+                                    </iframe>
+                                </div>
+                                <!-- <div id="smalltablet" class="tab-pane fade in">
+														<iframe width="600" height="960" ng-bind-html="{{url}}">
+														</iframe>
+                                                    </div> -->
+                                <div id="Iphone" class="tab-pane fade in">
+                                    <iframe width="375" height="667" ng-bind-html="LoadingUrl">
+                                    </iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 sdn_style">   
+        <h3 class="text-left" style="margin-top:0px;">{{Conversation_Name}}</h3>
+        <p class="text-left">{{Conversation_Description}}</p>
+        <p>&nbsp;</p>
+    </div>
+</div>
+<div class="row clac_con">
+    <div class="col-sm-12 text-center">
+        <ul class="tabs">
+            <a href="javascript:void(0)">
+                <li class="li_tab_active first_li"><span>1</span>Review Channel Content</li>
+            </a>
+            <a href="javascript:void(0)">
+                <li rel="tab2" class="li_tab_active"><span>2</span>Customize Channel Content</li>
+            </a>
+            <a href="javascript:void(0)">
+                <li rel="tab3" class="li_tab_active "><span>3</span>Select Design & Layout</li>
+            </a>
+            <a href="javascript:void(0)">
+                <li rel="tab4" class="li_tab_active last_li active"><span>4</span>Customize Design & Layout</li>
+            </a>
+        </ul>
+    </div>
+    <div class="col-md-12 text-center">
+        <p class="text-center"> Edit the creative as required</p>
+        <div class="text-center choose-temp">
+            <div class="btn-group launch">
+                <button type="submit" ng-disabled=" true" class="btn top-btn-align newclass" ng-repeat="label in labels" ng-hide="showLabel">{{label}}<br><p class="getdates">{{getdates1[$index]}}</p></button>
+                <button class="btn top-btn-align" ng-repeat="label in labels" ng-show="showLabel">{{label}}<p class="getdates">{{getdates1[$index]}}</p></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="selec-land">
+                    <li id="email" ng-class="showmailer?'act':''" ng-hide="mailFlag==false"><a id="EMAIL" href="javascript:void(0)" ng-click="showmailer=true;showlanding=false;showdirect=false;">EMAILER</a></li>
+                    <li id="dm" ng-class="showdirect?'act':''" ng-hide="dmFlag==false"><a href="javascript:void(0)" id="DIRECT" ng-click="showmailer=false;showlanding=false;showdirect=true;">DIRECT MAIL</a></li>
+                    <li id="landng" ng-class="showlanding?'act':''"><a href="javascript:void(0)" id="LANDING" ng-click="showmailer=false;showlanding=true;showdirect=false;">LANDING PAGE</a></li>
+                </ul>
+            </div>
+            <!--div class="col-md-6 text-right">                
+				<a href="javascript:void(0)" class="cont_edtr" style="display:none;" title="Editor"><img src="images/editor-hover.png" alt=""></a>
+				<a class="cls" style="display:block;" href="javascript:void(0)"><img src="images/editor-normal.png" alt=""></a>
+            </div-->
+        </div>
+    </div>
+</div>
+<div class="floor_container_inner">
+    <div class="floor_container">
+        <div class="floor_container_inner">
+            <div class="col-md-9" id="landing-close">
+                <div id="content-area1">
+                    <div id="holder1" ng-show="showmailer"></div>
+                    <div id="holder2" ng-show="showlanding">
+                        <!-- End of 2-columns -->
+                        <!-- Start of postfooter -->
+                        <!-- End of postfooter -->
+                    </div>
+                    <div id="holder3" ng-show="showdirect"></div>
+                </div>
+                <p></p>
+            </div>
+            <div class="col-md-3 rt-bg">
+                <div>
+                    <table width="50%">
+                        <tr>
+                            <td width="50%">Selected Div color :</td>
+                            <td width="50%"><input type="text" class="form-control" id="col_pickr1" value="#FFFFFF" maxlength="25" />
+                                <img
+                                    src="images/info.png" alt="" title=""></td>
+                        </tr>
+                        <tr>
+                            <td width="50%">Background color :</td>
+                            <td width="50%"><input type="text" class="form-control" id="col_pickr2" value="#FFFFFF" maxlength="25" />
+                                <img
+                                    src="images/info.png" alt="" title=""></td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div id="optionContainer">
+                    <div id="options"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p>&nbsp;</p>
+    <div class="row">
+        <div class="col-md-12 text-right">
+            <button type="button" class="btn btn-default back" title="Back" ng-click="backClick()">Back</button>
+            <button type="button" class="btn btn-default " title="Save and Continue" ng-click="imgUpload()" ng-hide="showLandingPage">Save &amp; Continue</button>
+            <button type="button" class="btn btn-default " title="Landing Page" ng-click="showLandingPage=false" ng-show="showLandingPage">Landing Page</button>
+
+        </div>
+    </div>
+    <p>&nbsp;</p>
+</div>
+<!--<div class="pull-right"><input type="button" class="btn btn-success" ng-click="getHtml()" style="border:1px solid transparent; background:transparent;"
+        value="Generate HTML" /></div>
+<div class="pull-right"><input type="button" class="btn btn-success" ng-click="imgUpload()" style="border:1px solid transparent; background:transparent;"
+        value="Img Test" /></div>-->
+<script> 
+
+$("#EMAIL").click(function() {
+$(".cont_edtr").css( "display", "none" );  
+$(".cls").css( "display", "block" );
+$(this).parent().addClass( "act" );
+$("#LANDING").parent().removeClass( "act" );
+$(".rt-bg").css( "display", "block" );
+$("#landing-close").css( "width", "66.6667%" );
+//$(".cls").css( "display", "none" );
+});
+
+
+$("#LANDING").click(function() {  
+$(".cls").css( "display", "block" );
+$(this).parent().addClass("act");
+$("#EMAIL").parent().removeClass( "act" );
+$(".cont_edtr").css( "display", "none" );
+});
+
+$(".cont_edtr" ).click(function() {   
+$(".cont_edtr").css( "display", "none" );
+$("#landing-close").css( "width", "66.6667%" );
+$(".cls").css( "display", "block" );
+$(".rt-bg").css( "display", "block" );
+});
+
+
+$(".cls" ).click(function() {  
+$(".rt-bg").css( "display", "none" );
+$(".cls").css( "display", "none" );
+$("#landing-close").css( "width", "100%" );
+$(".cont_edtr").css( "display", "inline-block" );
+});
+
+$( document ).ready(function() {
+	$("#loginDiv").parent().parent().css( "background-color", "#e6e6e6" );
+	$("body").removeClass( "body-bg" );
+    $('.EMAIL').trigger('click');
+});
+</script>

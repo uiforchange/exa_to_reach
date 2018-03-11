@@ -1,0 +1,460 @@
+<div class="row changepass">
+    <div class="col-sm-12">
+        <script type="text/javascript">
+	var fromDate = "$!campaign.from";
+	var toDate = "$!campaign.to";
+	var reminderDate = "$!campaign.reminderDate";
+	var categoryVal = "$!campaign.category";
+	var productVal = "$!campaign.product";
+	var campaignId = "$!campaign.campaignId"
+	var status = "$!campaign.status"
+	var file = "$!campaign.file"
+</script>
+
+<script type="text/javascript">
+	$('#createForm').submit(function() {
+		if ($('#editCampaign').val() == "1") {
+			$(this).close();
+		}
+	});
+</script>
+
+<script type="text/javascript">
+	jQuery(document).ready(
+			function() {
+				jQuery("#link-id").click(
+						function(event) {
+							if (jQuery("#category").val() != ""
+									&& jQuery("#product").val() != "")
+								makeRequest();
+							// Added campaign desc pre-fill
+							appendCategoryToCampaignDesc();
+							appendProductToCampaignDesc();
+							return false;
+						})
+			})
+
+	function makeRequest() {
+		document.getElementById('campaignTypeId').value='';
+		jQuery("#campaignId").children('.columns').remove();
+		var link = jQuery('#link-id');
+		var url = link.attr('href');
+		// Set the pageAction to the onLinkClicked method in the Java Page class.
+		var extraData = 'pageAction=onLinkClicked&category='
+				+ jQuery("#category").val() + '&product='
+				+ jQuery("#product").val().replace("_", " ");
+		jQuery.get(url, extraData, function(data) {
+			jQuery("#campaignId").children('.columns').remove();
+			
+			data=jQuery.parseJSON(data);
+			var campaignTypeList=" ";
+			$.each( data, function( key, value ) {
+				campaignTypeList =campaignTypeList + '<div class="three columns end"><div class="sNotSelected" id="'+value.id+'">'+value.name+'</div></div>'
+			});
+			
+			jQuery("#campaignId").append(campaignTypeList);
+			$('.sSelected,.sNotSelected').click(
+					function() {
+						if (!$(this).hasClass("sNotSelectedDisable")) {
+							var selected = $(this).closest('div.columns').siblings()
+									.find('.sSelected');
+							selected.removeClass('sSelected');
+							selected.addClass('sNotSelected');
+							$(this).closest('div.columns').siblings().find(":radio")
+									.prop("checked", false);
+							
+							if ($(this).hasClass('sSelected')) {
+						
+							}
+
+							// For toggle effect , added else to the if condition.
+							else if ($(this).hasClass('sNotSelected')) {// alert(1)
+								$(this).removeClass("sNotSelected");
+								$(this).addClass('sSelected');
+								$(this).find(":radio").prop("checked", true);
+
+							}
+						}
+					});
+			$('#campaignId > .columns > div').click(function(){
+				
+					 if($(this).hasClass('sSelected'))
+						document.getElementById('campaignTypeId').value=$(this).attr('id'); 
+				
+				
+			})
+			
+		});
+	}
+</script>
+
+<script type="text/javascript">
+	function appendCategoryToCampaignDesc() {
+		var category = document.getElementById('category').value;
+		document.getElementById('campaignDesc').innerText = category;
+	}
+
+	function appendProductToCampaignDesc() {
+		var product = document.getElementById('product').value;
+		var category = document.getElementById('category').value;
+		document.getElementById('campaignDesc').innerText = category + " and "
+				+ product;
+	}
+
+	function hasClass(element, cls) {
+		return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+	}
+</script>
+ <div id="commonAlert" class="modal fade modal in" role="dialog" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-xs">
+            <div class="modal-content md-bg">
+                <div class="modal-body">
+                    <div class="modal-holder">
+                        <h4 class="text-center">{{commonAlertText}}</h4>
+                        <div class="col-sm-12 text-center">
+                            <button class="btn btn-default" data-dismiss="modal" alt="Ok" title="Ok">Ok</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+<div class="container">
+<div class="row">
+	<div class="col-xs-7 col-xs-offset-3">
+		<div class="steps step-container">
+			<div class="col-xs-4 ">
+				<span class="step1"></span>Create Conversation
+			</div>
+			<div class="steps col-xs-3 activeStep">
+				<span class="step2-active"></span>
+				<p class="hide-for-small">Set Filters</p>
+			</div>
+			<div class="steps col-xs-4">
+				<span class="step3"></span>
+				<p class="hide-for-small">Segment Lists</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<h2>Set Filters</h2>
+			<h4>Please input the below values to generate the target list:</h4>
+		</div>
+	</div>
+		<div class="row">
+				<!--<pre>Form Data: {{formData | json}}</pre>-->
+				<form name="myForm" novalidate>
+					<div ng-repeat="fd in formData">
+						<div class="intro-content col-md-12">
+							<h3>{{fd.label}} <span style="color: red;">{{fd.validation.optional === 'false' ? '*' : ''}}</span></h3>
+						</div>
+						<div ng-if="fd.control === 'multiselect'" class="col-sm-12">
+							<div class="col-sm-3">
+								<div class="select-holder">
+									<select ng-model="formModel['static_' + fd.name + '_0']" name="{{'static_' + fd.name + '_0'}}" ng-required="false">
+										<option value="">Select Product type</option>
+										<option value="Credit card">Credit card</option>
+										<option value="Prepaid card">Prepaid card</option>
+										<option value="Saving account">Saving account</option>
+										<option value="Loan">Loan</option>
+										<option value="Insurance">Insurance</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<div class="select-holder">
+									<select ng-model="formModel['static_' + fd.name + '_1']" name="{{'static_' + fd.name + '_1'}}" ng-required="false">
+										<option value="Select Variant">Select Variant</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div ng-if="fd.control === 'text-combo'">
+							<div>
+								<div class="col-sm-3">
+									<input ng-model="formModel['static_' + fd.name + '_0']" class="inputBox float" name="{{'static_' + fd.name + '_0'}}" ng-required="true" />
+								</div>
+								<div class="col-sm-1">
+									<p class="text_center">times in</p> 
+								</div>
+								<div class="col-sm-3">
+									<input ng-model="formModel['static_' + fd.name + '_1']" class="inputBox float" name="{{'static_' + fd.name + '_1'}}" ng-required="true" />
+								</div>
+							</div>
+						</div>
+						<div ng-if="fd.control === 'history'">
+							<div>
+								<div class="col-sm-3">
+									<div class="select-holder">
+									<select ng-model="formModel['static_' + fd.name + '_0']" name="{{'static_' + fd.name + '_0'}}" ng-required="fd.validation.optional === 'false'">
+										<option value="" disabled>Select</option>
+										<option value="<=">Not more than</option>
+										<option value=">=">Not less than X times delay in Y period</option>
+									</select>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<input ng-model="formModel['static_' + fd.name + '_1']" class="inputBox float" name="{{'static_' + fd.name + '_1'}}" maxlength="3" ng-required="fd.validation.optional === 'false'" />	
+								</div>
+								<div class="col-sm-1"><p class="text_center">times in</p></div>
+								<div class="col-sm-3">
+									<div class="select-holder">
+									<select ng-model="formModel['static_' + fd.name + '_2']" name="{{'static_' + fd.name + '_2'}}" ng-required="fd.validation.optional === 'false'">
+										<option value="">Month</option>
+										<option value="30">1 month</option>
+										<option value="90">3 months</option>
+										<option value="365">12 months</option>
+									</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div ng-if="fd.control === 'migration'">
+							<div>
+								<div class="col-sm-1"><p class="text_center">From</p></div>
+								<div class="col-sm-3">
+									<div class="select-holder">
+										<select ng-model="formModel['static_' + fd.name + '_0']" name="{{'static_' + fd.name + '_0'}}" ng-required="fd.validation.optional === 'false'">
+											<option value="">Select</option>
+											<option value="Declining">Declining</option>
+											<option value="Flat">Flat</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="select-holder">
+									<select ng-model="formModel['static_' + fd.name + '_1']" name="{{'static_' + fd.name + '_1'}}" ng-required="fd.validation.optional === 'false'">
+										<option value="">Select</option>
+										<option value="and">And</option>
+										<option value="or">Or</option>
+									</select>
+									</div>
+								</div>
+								<div class="col-sm-1"><p class="text_center">to</p></div>
+								<div class="col-sm-3">
+									<div class="select-holder">
+									<select ng-model="formModel['static_' + fd.name + '_2']" name="{{'static_' + fd.name + '_2'}}" ng-required="fd.validation.optional === 'false'">
+										<option value="">Select</option>
+										<option value="Declining">Declining</option>
+										<option value="Flat">Flat</option>
+									</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div ng-if="fd.control === 'average_balance_trend'">
+							<div>
+								<div class="col-sm-3">
+									<input ng-model="formModel['static_' + fd.name + '_0']" class="inputBox float" name="{{'static_' + fd.name + '_0'}}" maxlength="3" ng-required="fd.validation.optional === 'false'" />
+								</div>
+								<div class="col-sm-1"><p ng-show="fd.type === 'percentage'" class="text_center">%</p></div>
+								<div class="col-sm-3">
+									<div class="select-holder">
+									<select ng-model="formModel['static_' + fd.name + '_1']" name="{{'static_' + fd.name + '_1'}}" ng-required="fd.validation.optional === 'false'">
+										<option value="">Select</option>
+										<option value="+">increase</option>
+										<option value="-">decrease</option>
+									</select>
+									</div>
+								</div>
+								<div class="col-sm-1"><p class="text_center">by</p></div>
+								<div class="col-sm-3">
+									<div class="select-holder">
+										<select ng-model="formModel[fd.name]" ng-options="rv.name for rv in fd.values" name="{{fd.name}}" ng-required="fd.validation.optional === 'false'">
+											<option value="" disabled>Select</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div ng-if="fd.control === 'invertedComboBox'">
+							<div>
+								<div class="col-sm-3">
+									<div class="select-holder">
+										<select ng-model="formModel[fd.name]" ng-options="rv.name for rv in fd.values" name="{{fd.name}}" ng-required="fd.validation.optional === 'false'">
+											<option value="" disabled>Select</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-sm-5">
+								<input ng-model="formModel['static_' + fd.name + '_0']" class="inputBox float" name="{{'static_' + fd.name + '_0'}}" maxlength="3" ng-required="fd.validation.optional === 'false'" />
+								</div>
+                                <div class="col-sm-2">								
+								<p ng-show="fd.type === 'percentage'" class="text_center">%</p>
+								</div>
+							</div>
+						</div>
+						<div ng-if="fd.control === 'text'">
+							<div class="col-sm-3">
+								<input ng-model="formModel[fd.name]" class="inputBox float" name="{{fd.name}}" ng-required="fd.validation.optional === 'false'" />
+							</div>
+						</div>
+						<div ng-if="fd.control === 'rfm'">
+							<div class="col-sm-3">
+								<input ng-model="formModel['static_' + fd.name + '_0']" class="inputBox float" name="{{'static_' + fd.name + '_0'}}" placeholder="Recency" maxlength="1" ng-required="fd.validation.optional === 'false'" />
+							</div>
+							<div class="col-sm-3">
+								<input ng-model="formModel['static_' + fd.name + '_1']" class="inputBox float" name="{{'static_' + fd.name + '_1'}}" placeholder="Frequency" maxlength="1" ng-required="fd.validation.optional === 'false'" />
+							</div>
+							<div class="col-sm-3">
+								<input ng-model="formModel['static_' + fd.name + '_2']" class="inputBox float" name="{{'static_' + fd.name + '_2'}}" placeholder="Monetary" maxlength="1" ng-required="fd.validation.optional === 'false'" />
+							</div>
+						</div>
+						<div ng-if="fd.control === 'combobox'">
+							<div>
+								<div class="col-sm-3">
+									<input ng-model="formModel['static_' + fd.name + '_0']" class="inputBox float" name="{{'static_' + fd.name + '_0'}}" maxlength="3" ng-required="fd.validation.optional === 'false'" />
+								</div>
+								<div class="col-sm-1"><p class="text_center">in</p></div>
+								<div class="col-sm-3">
+									<div class="select-holder">
+										<!--<select ng-model="formModel[fd.name]" ng-options="rv.name for rv in fd.values" name="{{fd.name}}" ng-required="fd.validation.optional === 'false'">
+
+										</select>-->
+										<select ng-model="formModel[fd.name]" name="{{fd.name}}" ng-required="fd.validation.optional === 'false'">
+											<option value="" disabled>Select</option>
+											<option value="{{rv.value}}" ng-selected="formModel[fd.name] === rv.value" ng-repeat="rv in fd.values">{{rv.name}}</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div ng-if="fd.control === 'buildup_trend'">
+							<div>
+								<div class="col-sm-3">
+									<div class="select-holder">
+									<select ng-model="formModel['static_' + fd.name + '_0']" name="{{'static_' + fd.name + '_0'}}" ng-required="fd.validation.optional === 'false'">
+										<option value="">Select</option>
+										<option value="+">Growth</option>
+										<option value="-">Decline</option>
+									</select>
+									</div>
+								</div>
+								<div class="col-sm-1"><p class="text_center">by</p></div>
+								<div class="col-sm-3">
+									<div class="select-holder">
+									<select ng-model="formModel['static_' + fd.name + '_1']" name="{{'static_' + fd.name + '_1'}}" ng-required="fd.validation.optional === 'false'">
+										<option value="">Select</option>
+										<option value="<">Not more than</option>
+										<option value=">">Not less than</option>
+									</select>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<input ng-model="formModel['static_' + fd.name + '_2']" class="inputBox float" name="{{'static_' + fd.name + '_2'}}" maxlength="3" ng-required="fd.validation.optional === 'false'" />
+								</div>
+								<div class="col-sm-1"><p class="text_center">% in</p></div>
+								<div class="col-sm-3 filter_top">
+									<input ng-model="formModel['static_' + fd.name + '_3']" class="inputBox float" name="{{'static_' + fd.name + '_3'}}" maxlength="3" ng-required="fd.validation.optional === 'false'" />
+								</div>
+								<div class="col-sm-3 filter_top">
+									<div class="select-holder">
+										<select ng-model="formModel[fd.name]" ng-options="rv.name for rv in fd.values" name="{{fd.name}}" ng-required="fd.validation.optional === 'false'">
+											<option value="" disabled>Select</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<!--<span class="alert-danger" ng-show="myForm[fd.name].$invalid">*This is required</span>-->
+						</div>
+						<div ng-if="fd.control === 'usage'">
+							<div class="col-sm-12">
+								<div class="col-sm-3">
+									<div class="select-holder">
+										<select ng-model="formModel['static_' + fd.name + '_0']" id="numberone" name="{{'static_' + fd.name + '_0'}}" ng-required="fd.validation.optional === 'false'">
+											<option value="">Select</option>
+											<option value="Declining">Declining</option>
+											<option value="Flat">Flat</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="select-holder">
+										<select ng-model="formModel[fd.name]" ng-options="rv.name for rv in fd.values" name="{{fd.name}}" ng-required="fd.validation.optional === 'false'">
+											<option value="" disabled>Select</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div ng-if="fd.control === 'select'">
+							<div>
+								<div class="col-sm-3">
+									<div class="select-holder">
+										<!--<select ng-model="formModel[fd.name]" ng-options="rv.name for rv in fd.values" name="{{fd.name}}" ng-required="fd.validation.optional === 'false'">
+
+										</select>-->
+										<select ng-model="formModel[fd.name]" name="{{fd.name}}" ng-required="fd.validation.optional === 'false'">
+											<option value="" disabled>Select</option>
+											<option value="{{rv.value}}" ng-selected="formModel[fd.name] === rv.value" ng-repeat="rv in fd.values">{{rv.name}}</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div ng-if="fd.control === 'radio'">
+							<!--<p>{{formModel[fd.name]}}</p>-->
+							<div ng-repeat="rv in fd.values" class="col-sm-3">
+							<label class="radiosection">
+								<input style="visibility: hidden;" type="radio" ng-model="formModel[fd.name]" ng-value="rv.value" name="{{fd.name}}" ng-required="fd.validation.optional === 'false'" />
+								<!-- <label>
+									<input style="visibility: hidden;" type="radio" ng-model="formModel[fd.name]" ng-value="rv.value" name="{{fd.name}}" ng-required="fd.validation.optional === 'false'" />
+									 <div class="radio-container" ng-class="{'checked': formModel[fd.name]}">
+									<div class="radio-circle"></div>{{rv.name}}
+									</div> 
+									<div class="radio-holder" ng-class="{'seg-act': formModel[fd.name] === rv.value}">
+									{{rv.name}}
+									</div>
+								</label> -->	
+								<div class="radio-holder" ng-class="{'seg-act': formModel[fd.name] === rv.value}">{{rv.name}}</div>
+								</label>
+								<!-- <input type="radio" ng-model="formModel[fd.name]" ng-value="rv.value" name="{{fd.name}}" ng-required="fd.validation.optional === 'false'" />
+								{{rv.name}} -->
+							</div>
+						</div>
+						<div ng-if="fd.control === 'checkbox'">
+							<div ng-repeat="rv in fd.values" class="col-sm-3">
+								<!-- <input type="checkbox" ng-model="formModel[rv.value]" name="{{rv.name}}" ng-change="checkboxChange(fd, rv, formModel[rv.value])" />
+								{{rv.name}} -->
+								<!-- <label>
+									<input style="visibility: hidden;" type="checkbox" ng-model="formModel[rv.value]" name="{{rv.name}}" ng-change="checkboxChange(fd, rv, formModel[rv.value])" />
+									<div class="checkbox-container" ng-class="{'chck-active': formModel[rv.value]}">
+									<div class="checkbox-square"></div>{{rv.name}}
+									</div>
+								</label> -->
+								<!--{{rv | json}}-->
+								<label class="chkbox-holder customersatisfaction" for="{{rv.value}}" ng-class="{'chck-active': formModel[rv.value]}">
+								<input class="channelclass" type="checkbox" ng-model="formModel[rv.value]" id="{{rv.value}}" name="{{rv.name}}" ng-change="checkboxChange(fd, rv, formModel[rv.value])" />
+								<label for="{{rv.value}}"></label>{{rv.name}}</label>
+							</div>
+							<!--{{isCheckboxRequired(fd)}}-->
+						</div>
+					</div>
+					<div class="col-sm-12" ng-show="formData.length > 0">
+						<pre ng-hide="showRecordCount">To know the approximate number of contacts, please click "Check Count"</pre>
+						<pre ng-show="showRecordCount">Approximate number of contacts in your output list is : <span ng-show="isLoadingCount"><img src="images/ajax-loader2.gif" /></span><span ng-show="!isLoadingCount">{{recordCount}}</span></pre>
+					</div>
+					<div class="col-sm-12" ng-show="formData.length > 0">
+						<p class="text-center">
+							<a href="javascript:void(0)" class="btn btn-default" alt="Back" title="Back" ng-click="back()">Back</a>
+							<a href="javascript:void(0)" class="btn btn-default" alt="Submit" title="Submit" ng-click="submit(myForm, formModel)">Check Count</a>
+							<a href="javascript:void(0)" ng-show="showRecordCount && !isLoadingCount" class="btn btn-default" alt="Save and Proceed" title="Save and Proceed" ng-click="saveAndProceed()">Save and Proceed</a>
+						</p>
+					</div>
+				</form>
+				<!--<pre>Form Values: {{formModel | json}}</pre>-->
+		</div>
+
+
+
+    </div>
+</div>
+</div>
+
+
+<div class="overlay-container" ng-show="isLoadingCount" style="position: fixed; top: 0; right: 0; bottom: 0; left: 0; background-color: black; opacity: 0.6;z-index: 100000;">
+
+</div>

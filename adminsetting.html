@@ -1,0 +1,24 @@
+<div>
+    <h1>FTP Details</h1>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th width="15%">FTP Port</th>
+            <th width="15%">Username</th>
+            <th width="15%">Password</th>
+            <th width="30%">Host URL</th>
+            <th width="25%">Path</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="ftp in ftpDetails">
+            <td>{{ftp.port}}</td>
+            <td>{{ftp.username}}</td>
+            <td>{{ftp.password}}</td>
+            <td>{{ftp.hosturl}}</td>  
+            <td>{{ftp.path}}</td>  
+        </tr>
+    </tbody>
+</table>
+
